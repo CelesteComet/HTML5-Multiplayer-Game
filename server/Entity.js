@@ -6,7 +6,8 @@ var Entity = function() {
     drawWidth: 50,
     drawHeight: 50,
     vX: 0,
-    vY: 0
+    vY: 0,
+    tick: 0
   }
 
   self.update = function() {

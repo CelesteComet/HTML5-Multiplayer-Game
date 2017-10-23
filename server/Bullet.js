@@ -6,15 +6,17 @@ var Bullet = function(angle) {
   self.id = Math.random();
   self.width = 5;
   self.height = 5;
-  self.vX = Math.cos(angle/180*Math.PI) * 10;
-  self.vY = Math.sin(angle/180*Math.PI) * 10;
-  self.timer = 0;
+  self.bulletSpeed = 25;
+  self.vX = Math.cos(angle/180*Math.PI) * self.bulletSpeed;
+  self.vY = Math.sin(angle/180*Math.PI) * self.bulletSpeed;
   self.toRemove = false;
+
   self.lifeTime = 50;
+  
 
   var super_update = self.update;
   self.update = function() {
-    if(self.timer++ > self.lifeTime) {
+    if(self.tick++ > self.lifeTime) {
       self.toRemove = true;
     }
 

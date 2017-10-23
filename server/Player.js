@@ -22,9 +22,11 @@ var Player = function(id) {
   self.rotation = 0;
   self.rotationSpeed = 5;
   self.maxSpeed = 10;
+  self.fireRate = 4;
 
   var super_update = self.update;
   self.update = function() {
+    self.tick++;
     self.updateSpeed();
     super_update();
 
@@ -40,7 +42,7 @@ var Player = function(id) {
       self.rotation = 0;
     }
 
-    if(self.pressingSpace) {
+    if(self.pressingSpace && self.tick % self.fireRate == 0) {
       self.shootBullet(self.rotation + 270); // to shoot up
     }
   }

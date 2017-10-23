@@ -12,14 +12,15 @@ var AirStubby = function() {
   self.height = self.drawHeight;
   self.vX = 0
   self.vY = +1;
-  self.timer = 20;
+  self.tick = 0;
   self.toRemove = false;
   self.lifeTime = 500;
+
 
   var super_update = self.update;
   self.update = function() {
     super_update();
-    if(self.timer++ > self.lifeTime) {
+    if(self.tick++ > self.lifeTime) {
       self.toRemove = true;
     }
   }
