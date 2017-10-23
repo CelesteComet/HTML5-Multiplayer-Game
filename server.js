@@ -20,8 +20,9 @@ var PLAYER_LIST = {};
 
 var Entity = require('./server/Entity');
 var Player = require('./server/Player');
-var Bullet = require('./server/Bullet');
 var AirStubby = require('./server/AirStubby');
+var Bullet = require('./server/Bullet');
+
 
 
 var sio = require('socket.io').listen(server)
@@ -51,7 +52,6 @@ setInterval(function() {
   }
   var total = 0;
   for(var i in pack) {
-    console.log(i + " " + pack[i].length)
   }
  // console.log(total.length);
   

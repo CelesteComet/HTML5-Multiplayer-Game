@@ -39,7 +39,7 @@
     data['airStubbys'].forEach(function(stubby) {
       console.log(stubby)
       ctx.save();
-      ctx.fillRect(stubby.x, stubby.y, stubby.drawWidth, stubby.drawHeight)
+      ctx.strokeRect(stubby.x, stubby.y, stubby.width, stubby.height)
       ctx.restore();
     })
 

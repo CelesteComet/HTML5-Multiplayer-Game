@@ -29,11 +29,11 @@ var Player = function(id) {
     super_update();
 
     if(self.pressingA) {
-      self.rotation += 1 * self.rotationSpeed;
+      self.rotation -= 1 * self.rotationSpeed;
     }
 
     if(self.pressingD) {
-      self.rotation -= 1 * self.rotationSpeed;
+      self.rotation += 1 * self.rotationSpeed;
     }
 
     if(self.rotation % 360 == 0) {

@@ -5,6 +5,10 @@ var AirStubby = function() {
   self.id = Math.random();
   self.x = Math.random() * 500;
   self.y = 0;
+  self.drawWidth = 20;
+  self.drawHeight = 20;
+  self.width = 20;
+  self.height = 20;
   self.vX = 0
   self.vY = +1;
   self.timer = 20;
@@ -39,6 +43,8 @@ AirStubby.update = function() {
     pack.push({
       x: stubby.x,
       y: stubby.y,
+      width: stubby.width,
+      height: stubby.height,
       drawWidth: stubby.drawWidth,
       drawHeight: stubby.drawHeight
     })
