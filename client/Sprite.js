@@ -126,6 +126,7 @@ SpriteManager.addSprite('daimanji', images['diamanji'], {
 })
 
 SpriteManager.sprites['explodingUFO'] = [
+  new Sprite(images['miniufo'], 27, 4, 44, 38),
   new Sprite(images['miniufo'], 2, 149, 44, 38),
   new Sprite(images['miniufo'], 55, 149, 49, 40),
   new Sprite(images['miniufo'], 112, 142, 54, 50),

@@ -14,13 +14,13 @@
   var ctx = document.getElementById("canvas").getContext('2d');
   ctx.font = '30px Ariel';
 
-  canvas.width = 500;
-  canvas.height = 500;
+  canvas.width = 1000;
+  canvas.height = 700;
 
   var socket = io();
 
   socket.on('newPosition', function(data) {
-    ctx.clearRect(0, 0, 500, 500);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     data['bullets'].forEach(function(bullet) {
       SpriteManager.sprites['bubble'][0].draw(ctx, bullet.x, bullet.y, 10, 10);
@@ -37,8 +37,9 @@
     })
 
     data['airStubbys'].forEach(function(stubby) {
-      console.log(stubby)
       ctx.save();
+
+      SpriteManager.sprites['explodingUFO'][0].draw(ctx, stubby.x, stubby.y, stubby.drawWidth, stubby.drawHeight);
       ctx.strokeRect(stubby.x, stubby.y, stubby.width, stubby.height)
       ctx.restore();
     })
