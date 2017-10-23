@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <canvas id="canvas" width='500' height='500' style="border: 1px solid #000000"></canvas>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script type="text/javascript" src="./Resources.js"></script>
+<script type="text/javascript" src="./Sprite.js"></script>
+<script type="text/javascript">
+  var canvas = document.getElementById("canvas");
+  var ctx = document.getElementById("canvas").getContext('2d');
+  ctx.font = '30px Ariel';
+
+  canvas.width = 500;
+  canvas.height = 500;
+
+  var socket = io();
+
+  socket.on('newPosition', function(data) {
+    ctx.clearRect(0, 0, 500, 500);
+
+    data['bullets'].forEach(function(bullet) {
+      SpriteManager.sprites['bubble'][0].draw(ctx, bullet.x, bullet.y, 10, 10);
+    })
+
+    data['players'].forEach(function(player) {
+      ctx.save();
+      ctx.translate(player.x + player.drawWidth/2, player.y + player.drawHeight/2)
+      ctx.rotate(player.rotation * Math.PI / 180);
+      ctx.strokeRect(0, 0, player.drawWidth, player.drawHeight);
+      ctx.drawImage(images['jet'], -player.drawWidth/2, -player.drawHeight/2, player.drawWidth, player.drawHeight);
+      ctx.fillText(player.number, 0, 0);
+      ctx.restore();
+    })
+
+    data['airStubbys'].forEach(function(stubby) {
+      console.log(stubby)
+      ctx.save();
+      ctx.fillRect(stubby.x, stubby.y, stubby.drawWidth, stubby.drawHeight)
+      ctx.restore();
+    })
+
+
+
+
+    /*
+    data.forEach(function(e) {
+      ctx.fillText(e.number, e.x, e.y);
+    })
+    */
+  })
+
+  function keyUpHandler(e) {
+    var key = e.keyCode;
+    if(key == 39) { socket.emit('keyPress', {input: 'right', state: false}) }
+    if(key == 37) { socket.emit('keyPress', {input: 'left', state: false})  }
+    if(key == 38) { socket.emit('keyPress', {input: 'up', state: false})    }
+    if(key == 40) { socket.emit('keyPress', {input: 'down', state: false})  }
+    if(key == 32) { socket.emit('keyPress', {input: 'space', state: false})  }    
+    if(key == 68) { socket.emit('keyPress', {input: 'D', state: false})  }
+    if(key == 65) { socket.emit('keyPress', {input: 'A', state: false})  }   
+    /*
+    if(key == 37) { this.keys['left'] = false }
+    if(key == 38) { this.keys['up'] = false }  
+    if(key == 40) { this.keys['down'] = false }   
+    */ 
+    //if(key == 32) { this.keys['fire'] = false }
+    //if(key == 68) { this.keys['rotateRight'] = false }
+    //if(key == 65) { this.keys['rotateLeft'] = false }
+  }
+
+  function keyDownHandler(e) {
+    var key = e.keyCode;
+    if(key == 39) { socket.emit('keyPress', {input: 'right', state: true}) }
+    if(key == 37) { socket.emit('keyPress', {input: 'left', state: true})  }
+    if(key == 38) { socket.emit('keyPress', {input: 'up', state: true})    }
+    if(key == 40) { socket.emit('keyPress', {input: 'down', state: true})  }
+    if(key == 32) { socket.emit('keyPress', {input: 'space', state: true})  } 
+    if(key == 68) { socket.emit('keyPress', {input: 'D', state: true})  }
+    if(key == 65) { socket.emit('keyPress', {input: 'A', state: true})  }   
+    /*
+    if(key == 37) { this.keys['left'] = true }
+    if(key == 38) { this.keys['up'] = true }
+    if(key == 40) { this.keys['down'] = true }    
+    //if(key == 32) { this.keys['fire'] = true }
+    */
+    //if(key == 68) { this.keys['rotateRight'] = true }
+    //if(key == 65) { this.keys['rotateLeft'] = true }
+  }
+
+  window.addEventListener("keydown", self.keyDownHandler.bind(this), false);
+  window.addEventListener("keyup", self.keyUpHandler.bind(this), false);
+</script>
+
+
+
+</html>
