@@ -7,7 +7,7 @@ var Bullet = function(angle) {
   self.vY = Math.sin(angle/180*Math.PI) * 10;
   self.timer = 0;
   self.toRemove = false;
-  self.lifeTime = 50;
+  self.lifeTime = 20;
 
   var super_update = self.update;
   self.update = function() {

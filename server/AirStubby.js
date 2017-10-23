@@ -7,8 +7,9 @@ var AirStubby = function() {
   self.y = 0;
   self.vX = 0
   self.vY = +1;
-  self.timer = 50;
+  self.timer = 20;
   self.toRemove = false;
+  self.lifeTime = 500;
 
   var super_update = self.update;
   self.update = function() {
@@ -33,7 +34,7 @@ AirStubby.update = function() {
     var stubby = AirStubby.list[i];
     stubby.update();
     if(stubby.toRemove) {
-      delete Bullet.list[i];
+      delete AirStubby.list[i];
     }
     pack.push({
       x: stubby.x,

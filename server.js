@@ -49,7 +49,11 @@ setInterval(function() {
     bullets: Bullet.update(),
     airStubbys: AirStubby.update()
   }
-
+  var total = 0;
+  for(var i in pack) {
+    console.log(i + " " + pack[i].length)
+  }
+ // console.log(total.length);
   
   for(var i in SOCKET_LIST) {
     var socket = SOCKET_LIST[i];
