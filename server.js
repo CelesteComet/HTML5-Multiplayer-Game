@@ -18,10 +18,11 @@ server.listen(port, function() {
 var SOCKET_LIST = {};
 var PLAYER_LIST = {};
 
-var Entity = require('./server/Entity');
-var Player = require('./server/Player');
-var AirStubby = require('./server/AirStubby');
-var Bullet = require('./server/Bullet');
+require('./server/Entity');
+require('./server/Player');
+require('./server/AirStubby');
+require('./server/Bubble');
+require('./server/Bullet');
 
 
 
@@ -44,16 +45,19 @@ sio.sockets.on('connection', function(socket) {
 
 
 setInterval(function() {
-
+  debugger;
   var pack = {
-    players: Player.update(),
     bullets: Bullet.update(),
-    airStubbys: AirStubby.update()
+    players: Player.update(),
+    
+    airStubbys: AirStubby.update(),
+    bubbles: Bubble.update()
   }
   var total = 0;
   for(var i in pack) {
+    total += pack[i].length;
   }
- // console.log(total.length);
+  console.log(total);
   
   for(var i in SOCKET_LIST) {
     var socket = SOCKET_LIST[i];

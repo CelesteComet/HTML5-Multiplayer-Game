@@ -1,7 +1,4 @@
-var Entity = require('./Entity');
-var AirStubby = require('./AirStubby');
-
-var Bullet = function(angle) {
+Bullet = function(angle) {
   var self = Entity();
   self.id = Math.random();
   self.width = 5;
@@ -54,4 +51,3 @@ Bullet.update = function() {
   return pack;
 }
 
-module.exports = Bullet;

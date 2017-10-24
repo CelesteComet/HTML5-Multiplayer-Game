@@ -1,7 +1,4 @@
-var Entity = require('./Entity');
-var Bullet = require('./Bullet');
-
-var Player = function(id) {
+Player = function(id) {
   var self = Entity();
   self.id = id;
   self.number = "" + Math.floor(10 * Math.random());
@@ -112,4 +109,3 @@ Player.update = function() {
   return pack;
 }
 
-module.exports = Player;

@@ -1,4 +1,4 @@
-var Entity = function() {
+Entity = function() {
   var self = {
     id: "",
     x: 250,
@@ -35,4 +35,3 @@ var Entity = function() {
 }
 
 
-module.exports = Entity;

@@ -1,6 +1,6 @@
-var Entity = require('./Entity');
+var math = require('./math')();
 
-var AirStubby = function() {
+AirStubby = function() {
   var self = Entity();
   self.id = Math.random();
   self.x = Math.random() * 500;
@@ -11,7 +11,7 @@ var AirStubby = function() {
   self.width = self.drawWidth;
   self.height = self.drawHeight;
   self.vX = 0
-  self.vY = +1;
+  self.vY = 0.5;
   self.tick = 0;
   self.toRemove = false;
   self.lifeTime = 500;
@@ -20,8 +20,27 @@ var AirStubby = function() {
   var super_update = self.update;
   self.update = function() {
     super_update();
-    if(self.tick++ > self.lifeTime) {
+    self.tick++;
+    if(self.tick > self.lifeTime) {
       self.toRemove = true;
+    }
+
+    if(self.tick % 100 == 0) {
+
+      if(Object.keys(Player.list).length > 0) {
+        var players = []
+        for(id in Player.list) {
+          players.push(Player.list[id]);
+        }
+        var p = players[0];
+        var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
+        var b = Bubble(angle);
+        b.x = self.x;
+        b.y = self.y;
+      }
+
+      b.x = self.x;
+      b.y = self.y;
     }
   }
 
@@ -54,4 +73,3 @@ AirStubby.update = function() {
   return pack;
 }
 
-module.exports = AirStubby;
