@@ -39,8 +39,6 @@ AirStubby = function() {
         b.y = self.y;
       }
 
-      b.x = self.x;
-      b.y = self.y;
     }
   }
 

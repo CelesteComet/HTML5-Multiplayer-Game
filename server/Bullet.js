@@ -25,6 +25,17 @@ Bullet = function(angle) {
         stubby.toRemove = true;
       }
     }
+
+    // Check all Bubbles for collision
+    for(var i in Bubble.list) {
+      var bubble = Bubble.list[i];
+      var rect = {x: self.x, y: self.y, w: this.width, h: this.height};
+      var circle = {x: bubble.x, y: bubble.y, r: bubble.radius}
+      if(self.rectCircleCollision(rect, circle)) {
+        self.toRemove = true;
+        bubble.toRemove = true;
+      }
+    }
     super_update();
   }
 
