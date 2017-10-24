@@ -1,10 +1,13 @@
-Bullet = function(angle) {
+Bullet = function(angle, owner) {
   var self = Entity();
   self.id = Math.random();
-  self.width = 5;
-  self.height = 5;
-  self.bulletSpeed = 25;
+  self.scale = 0.7;
+  self.width = 17 * self.scale;
+  self.height = 40 * self.scale;
+  self.bulletSpeed = 40;
   self.damage = 10;
+  self.owner = owner;
+  self.rotation = owner.rotation;
   self.vX = Math.cos(angle/180*Math.PI) * self.bulletSpeed;
   self.vY = Math.sin(angle/180*Math.PI) * self.bulletSpeed;
   self.toRemove = false;
@@ -58,7 +61,10 @@ Bullet.update = function() {
     }
     pack.push({
       x: bullet.x,
-      y: bullet.y
+      y: bullet.y,
+      width: bullet.width,
+      height: bullet.height,
+      rotation: bullet.rotation
     })
   }
   return pack;

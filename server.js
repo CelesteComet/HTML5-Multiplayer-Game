@@ -57,7 +57,7 @@ setInterval(function() {
   for(var i in pack) {
     total += pack[i].length;
   }
-  console.log(total);
+ // console.log(total);
   
   for(var i in SOCKET_LIST) {
     var socket = SOCKET_LIST[i];

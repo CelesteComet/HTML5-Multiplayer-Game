@@ -24,13 +24,15 @@
 
     data['bullets'].forEach(function(bullet) {
       ctx.save();
-      SpriteManager.sprites['bubble'][0].draw(ctx, bullet.x, bullet.y, 10, 10);
+      ctx.translate(bullet.x + bullet.width/2, bullet.y + bullet.height/2)
+      ctx.rotate(bullet.rotation * Math.PI / 180);
+      ctx.drawImage(images['bullet'], 0, 0, bullet.width, bullet.height);
       ctx.restore();
     })
 
     data['bubbles'].forEach(function(bubble) {
       ctx.save();
-      SpriteManager.sprites['bubble'][0].draw(ctx, bubble.x, bubble.y, 50, 50);
+      SpriteManager.sprites['bubble'][bubble.animationFrame].draw(ctx, bubble.x, bubble.y, 50, 50);
       ctx.restore();
     })
 

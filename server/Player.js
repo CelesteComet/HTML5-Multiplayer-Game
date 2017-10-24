@@ -19,7 +19,7 @@ Player = function(id) {
   self.rotation = 0;
   self.rotationSpeed = 5;
   self.maxSpeed = 10;
-  self.fireRate = 4;
+  self.fireRate = 2;
 
   var super_update = self.update;
   self.update = function() {
@@ -63,7 +63,7 @@ Player = function(id) {
   }
 
   self.shootBullet = function(angle) {
-    var b = Bullet(angle);
+    var b = Bullet(angle, self);
     b.x = self.x;
     b.y = self.y;
   }

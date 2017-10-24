@@ -10,12 +10,13 @@ var audio = {
 loadImage("neworbs", 'png');
 loadImage("jet", 'gif');
 loadImage("miniufo", "gif");
+loadImage("bullet", "png");
 /*
 loadImage("explosion", 'png', game);
 
 loadImage("ocean", 'png', game);
 loadImage("oceanflipped", 'png', game);
-loadImage("bullet", "png", game);
+
 loadImage("cloud1", "png", game);
 
 loadImage("stubbi", "png", game);

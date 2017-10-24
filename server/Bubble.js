@@ -5,13 +5,22 @@ Bubble = function(angle) {
   self.damage = 10;
   self.lifeTime = 1000;
   self.toRemove = false;
-  self.speed = 5;
+  self.speed = 3;
   self.vX = Math.cos(angle/180*Math.PI) * self.speed;
   self.vY = Math.sin(angle/180*Math.PI) * self.speed;
+  self.animationFrame = 0;
+  self.animationFrameLength = 49;
 
   var super_update = self.update;
   self.update = function() {
     self.tick++;
+
+    // update animation
+    if(self.animationFrame == self.animationFrameLength - 1) {
+      self.animationFrame = 0;
+    }
+    self.animationFrame += 1;
+
     if(self.tick > self.lifeTime) {
       self.toRemove = true;
     }
@@ -35,7 +44,8 @@ Bubble.update = function() {
     }
     pack.push({
       x: bubble.x,
-      y: bubble.y
+      y: bubble.y,
+      animationFrame: bubble.animationFrame
     })
   }
   return pack;
