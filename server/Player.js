@@ -1,3 +1,5 @@
+var math = require('./math')();
+
 Player = function(id) {
   var self = Entity();
   self.id = id;
@@ -73,6 +75,17 @@ Player = function(id) {
 }
 
 Player.list = {};
+
+Player.getRandomPlayer = function() {
+  if(Object.keys(Player.list).length > 0) {
+    var players = []
+    for(id in Player.list) {
+      players.push(Player.list[id]);
+    }
+    return players[math.getRandomNumberBetween(0, players.length - 1)];
+  }
+  return null; 
+}
 
 Player.onConnect = function(socket) {
   var player = Player(socket.id);

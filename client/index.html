@@ -58,7 +58,7 @@
         ctx.restore();
       }
       ctx.save();
-      SpriteManager.sprites['explodingUFO'][0].draw(ctx, stubby.x, stubby.y, stubby.drawWidth, stubby.drawHeight);
+      SpriteManager.sprites['miniufo'][stubby.animationFrame].draw(ctx, stubby.x, stubby.y, stubby.drawWidth, stubby.drawHeight);
       ctx.strokeRect(stubby.x, stubby.y, stubby.width, stubby.height)
       ctx.restore();
     })

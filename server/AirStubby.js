@@ -17,30 +17,38 @@ AirStubby = function() {
   self.lifeTime = 500;
   self.showHealthBar = false;
   self.health = 100;
+  self.animationFrame = 0;
+  self.animationFrameLength = 15;
 
 
   var super_update = self.update;
   self.update = function() {
     super_update();
     self.tick++;
+
+    // animation
+    if(self.tick % 10 == 0) {
+      self.animationFrame++;
+    }
+
+    if(self.animationFrame > self.animationFrameLength) {
+      self.animationFrame = 0;
+    }
+
+    // lifetime
     if(self.tick > self.lifeTime) {
       self.toRemove = true;
     }
 
-    if(self.tick % 100 == 0) {
-
-      if(Object.keys(Player.list).length > 0) {
-        var players = []
-        for(id in Player.list) {
-          players.push(Player.list[id]);
-        }
-        var p = players[math.getRandomNumberBetween(0, players.length - 1)];
+    var canFire = self.tick % 100 == 0;
+    if(canFire) {
+      var p = Player.getRandomPlayer();
+      if(p) {
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
         var b = Bubble(angle);
         b.x = self.x;
         b.y = self.y;
       }
-
     }
   }
 
@@ -49,6 +57,8 @@ AirStubby = function() {
     self.health -= ammoType.damage;
     if(self.health <= 0) { self.toRemove = true }
   }
+
+  
 
   AirStubby.list[self.id] = self;
   return self;
@@ -75,7 +85,8 @@ AirStubby.update = function() {
       drawWidth: stubby.drawWidth,
       drawHeight: stubby.drawHeight,
       showHealthBar: stubby.showHealthBar,
-      health: stubby.health
+      health: stubby.health,
+      animationFrame: stubby.animationFrame
     })
   }
   return pack;

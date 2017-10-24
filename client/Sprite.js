@@ -125,6 +125,33 @@ SpriteManager.addSprite('daimanji', images['diamanji'], {
   rev: true
 })
 
+var miniUFOData = [
+  [27, 4, 44, 38],
+  [78, 4, 44, 38],
+  [129, 4, 44, 38],
+  [180, 4, 43, 38],
+  [230, 4, 43, 38],
+  [280, 4, 43, 38],
+  [29, 50, 43, 37],
+  [80, 50, 44, 37],
+  [131, 50, 44, 37],
+  [180, 50, 44, 37],
+  [230, 50, 43, 37],
+  [279, 50, 44, 37],
+  [121, 94, 43, 38],
+  [176, 93, 43, 39],
+  [228, 94, 44, 38],
+  [279, 93, 44, 39]
+]
+
+SpriteManager.sprites['miniufo'] = [];
+for(var i = 0; i < miniUFOData.length; i++) {
+
+  SpriteManager.sprites['miniufo'].push(
+    new Sprite(images['miniufo'], miniUFOData[i][0], miniUFOData[i][1], miniUFOData[i][2], miniUFOData[i][3])
+  );
+}
+
 SpriteManager.sprites['explodingUFO'] = [
   new Sprite(images['miniufo'], 27, 4, 44, 38),
   new Sprite(images['miniufo'], 2, 149, 44, 38),
