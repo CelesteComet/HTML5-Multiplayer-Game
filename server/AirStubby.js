@@ -15,6 +15,8 @@ AirStubby = function() {
   self.tick = 0;
   self.toRemove = false;
   self.lifeTime = 500;
+  self.showHealthBar = false;
+  self.health = 100;
 
 
   var super_update = self.update;
@@ -32,7 +34,7 @@ AirStubby = function() {
         for(id in Player.list) {
           players.push(Player.list[id]);
         }
-        var p = players[0];
+        var p = players[math.getRandomNumberBetween(0, players.length - 1)];
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
         var b = Bubble(angle);
         b.x = self.x;
@@ -40,6 +42,12 @@ AirStubby = function() {
       }
 
     }
+  }
+
+  self.gotHitBy = function(ammoType) {
+    self.showHealthBar = true;
+    self.health -= ammoType.damage;
+    if(self.health <= 0) { self.toRemove = true }
   }
 
   AirStubby.list[self.id] = self;
@@ -50,7 +58,7 @@ AirStubby.list = {};
 
 AirStubby.update = function() {
   var pack = [];
-  if (Math.random() < 0.1) {
+  if (Math.random() < 0.02) {
     AirStubby();
   }
   for(var i in AirStubby.list) {
@@ -65,7 +73,9 @@ AirStubby.update = function() {
       width: stubby.width,
       height: stubby.height,
       drawWidth: stubby.drawWidth,
-      drawHeight: stubby.drawHeight
+      drawHeight: stubby.drawHeight,
+      showHealthBar: stubby.showHealthBar,
+      health: stubby.health
     })
   }
   return pack;

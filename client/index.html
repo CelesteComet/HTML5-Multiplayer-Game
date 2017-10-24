@@ -27,7 +27,7 @@
       SpriteManager.sprites['bubble'][0].draw(ctx, bullet.x, bullet.y, 10, 10);
       ctx.restore();
     })
-    
+
     data['bubbles'].forEach(function(bubble) {
       ctx.save();
       SpriteManager.sprites['bubble'][0].draw(ctx, bubble.x, bubble.y, 50, 50);
@@ -44,9 +44,18 @@
       ctx.restore();
     })
 
+    var healthBarOffset = 10;
+    var healthBarHeight = 4;
     data['airStubbys'].forEach(function(stubby) {
+      if(stubby.showHealthBar) {
+        ctx.save();
+        ctx.fillStyle = 'red';
+        ctx.fillRect(stubby.x, stubby.y - healthBarOffset, stubby.width * (stubby.health/stubby.width), healthBarHeight);
+        ctx.strokeStyle = 'black';
+        ctx.strokeRect(stubby.x, stubby.y - healthBarOffset, stubby.width, healthBarHeight);
+        ctx.restore();
+      }
       ctx.save();
-
       SpriteManager.sprites['explodingUFO'][0].draw(ctx, stubby.x, stubby.y, stubby.drawWidth, stubby.drawHeight);
       ctx.strokeRect(stubby.x, stubby.y, stubby.width, stubby.height)
       ctx.restore();

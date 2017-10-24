@@ -4,9 +4,11 @@ Bullet = function(angle) {
   self.width = 5;
   self.height = 5;
   self.bulletSpeed = 25;
+  self.damage = 10;
   self.vX = Math.cos(angle/180*Math.PI) * self.bulletSpeed;
   self.vY = Math.sin(angle/180*Math.PI) * self.bulletSpeed;
   self.toRemove = false;
+
 
   self.lifeTime = 50;
   
@@ -22,7 +24,7 @@ Bullet = function(angle) {
       var stubby = AirStubby.list[i];
       if(self.collide(stubby)) {
         self.toRemove = true;
-        stubby.toRemove = true;
+        stubby.gotHitBy(self);
       }
     }
 
