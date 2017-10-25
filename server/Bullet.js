@@ -27,6 +27,7 @@ Bullet = function(angle, owner) {
       var stubby = AirStubby.list[i];
       if(self.collide(stubby)) {
         self.toRemove = true;
+        ExplodingStubby(self.x + Math.random() * 2, self.y + Math.random() * 2, 'bulletHit');
         stubby.gotHitBy(self);
       }
     }

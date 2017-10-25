@@ -11,6 +11,7 @@ loadImage("neworbs", 'png');
 loadImage("jet", 'gif');
 loadImage("miniufo", "gif");
 loadImage("bullet", "png");
+loadImage("bulletHit", "png");
 /*
 loadImage("explosion", 'png', game);
 

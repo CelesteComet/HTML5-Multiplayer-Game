@@ -14,11 +14,13 @@ AirStubby = function() {
   self.vY = 0.5;
   self.tick = 0;
   self.toRemove = false;
-  self.lifeTime = 500;
+  self.lifeTime = 1000;
   self.showHealthBar = false;
   self.health = 100;
   self.animationFrame = 0;
   self.animationFrameLength = 15;
+  self.animationSpeed = 2;
+
 
 
   var super_update = self.update;
@@ -27,9 +29,10 @@ AirStubby = function() {
     self.tick++;
 
     // animation
-    if(self.tick % 10 == 0) {
+    if(self.tick % self.animationSpeed == 0) {
       self.animationFrame++;
     }
+
 
     if(self.animationFrame > self.animationFrameLength) {
       self.animationFrame = 0;
@@ -45,9 +48,9 @@ AirStubby = function() {
       var p = Player.getRandomPlayer();
       if(p) {
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
-        var b = Bubble(angle);
-        b.x = self.x;
-        b.y = self.y;
+        //var b = Bubble(angle);
+        //b.x = self.x;
+        //b.y = self.y;
       }
     }
   }
@@ -55,7 +58,11 @@ AirStubby = function() {
   self.gotHitBy = function(ammoType) {
     self.showHealthBar = true;
     self.health -= ammoType.damage;
-    if(self.health <= 0) { self.toRemove = true }
+    if(self.health <= 0) { 
+      self.showHealthBar = false;
+      self.toRemove = true 
+      ExplodingStubby(self.x, self.y, 'miniufo');
+    }
   }
 
   
