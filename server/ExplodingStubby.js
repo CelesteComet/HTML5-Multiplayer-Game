@@ -10,12 +10,13 @@ SpriteEffect = function(x, y) {
     toRemove: false,
     animationFrame: 0,
     animationSpeed: 3,
-    animationFrameLength: 10
+    animationFrameLength: 10,
+    sound: false
   };
 
   self.update = function() {
     self.tick++;
-
+    if(self.tick == 1) { self.sound = true} else { self.sound = false}
     if(self.animationFrame > self.animationFrameLength - 1) {
       self.toRemove = true;
     }
@@ -70,7 +71,8 @@ ExplodingStubby.update = function() {
       height: es.height,
       animationFrame: es.animationFrame,
       image: es.image,
-      name: es.name
+      name: es.name,
+      sound: es.sound
     })
   }
   return pack;

@@ -38,8 +38,11 @@
 
     data['spriteEffects'].forEach(function(effect) {
       ctx.save();
-      console.log(effect)
       SpriteManager.sprites[effect.name][effect.animationFrame].draw(ctx, effect.x, effect.y, effect.width, effect.height);
+      if(effect.sound && effect.name == 'miniufo') {
+        playAudio("smallerExplosion", 0.3);
+      }
+      
       ctx.restore();
     })
 
