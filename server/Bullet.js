@@ -1,10 +1,10 @@
 Bullet = function(angle, owner) {
   var self = Entity();
   self.id = Math.random();
-  self.scale = 0.7;
-  self.width = 17 * self.scale;
-  self.height = 40 * self.scale;
-  self.bulletSpeed = 40;
+  self.scale = .5;
+  self.width = 10;//17 * self.scale;
+  self.height = 20;//40 * self.scale;
+  self.bulletSpeed = 20;
   self.damage = 10;
   self.owner = owner;
   self.rotation = owner.rotation;
@@ -57,6 +57,7 @@ Bullet.update = function() {
   for(var i in Bullet.list) {
     var bullet = Bullet.list[i];
     bullet.update();
+
     if(bullet.toRemove) {
       delete Bullet.list[i];
     }

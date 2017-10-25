@@ -6,8 +6,11 @@ Player = function(id) {
   self.number = "" + Math.floor(10 * Math.random());
 
   // Size
+  self.width = 110;
+  self.height = 110;
   self.drawWidth = 110;
   self.drawHeight = 110;
+  self.radius = Math.sqrt( (self.width/2 * self.width/2) + (self.height/2 * self.height/2) )
 
   // Controls
   self.pressingRight = false;
@@ -21,7 +24,7 @@ Player = function(id) {
   self.rotation = 0;
   self.rotationSpeed = 5;
   self.maxSpeed = 10;
-  self.fireRate = 2;
+  self.fireRate = 1.5;
 
   var super_update = self.update;
   self.update = function() {
@@ -63,11 +66,50 @@ Player = function(id) {
       self.vY = 0;
     }
   }
+/*
+    var gunOffset = 1.9;
+    this.hX = this.x + this.hitBoxWidth/2;
+    this.hY = this.y + this.hitBoxHeight/2;
+    var vX = Math.sin((this.rotation) * Math.PI / 180);
+    var vY = -Math.cos((this.rotation) * Math.PI / 180);
+    var rotation = this.rotation;
+    var crotation = this.rotation + 225;
+    var rads = degreesToRadians(crotation);
+    var centerX = this.x + this.width/2;
+    var centerY = this.y + this.height/2;
+    var radius = Math.sqrt( (this.width/2/gunOffset * this.width/2/gunOffset) + (this.height/2/gunOffset * this.height/2/gunOffset) ) 
+    var gunX = radius * Math.cos(rads) + centerX;
+    var gunY = radius * Math.sin(rads) + centerY; 
 
+    
+    var jrotation = this.rotation + 300;
+    var jrads = degreesToRadians(jrotation);
+    
+    
+    var jradius = Math.sqrt( (this.width/2/gunOffset * this.width/2/gunOffset) + (this.height/2/gunOffset * this.height/2/gunOffset) ) 
+    var gunX2 = jradius * Math.cos(jrads) + centerX;
+    var gunY2 = jradius * Math.sin(jrads) + centerY; 
+*/
   self.shootBullet = function(angle) {
+    
+    var radian = math.degreeToRadian(angle + 315);
+    var radian2 = math.degreeToRadian(angle + 45);
+    
+    var centerX = self.x + self.width/2;
+    var centerY = self.y + self.height/2;
+
+    var gunOffset = 3;
+    
+
+   // var radius = Math.sqrt( Math.pow(self.width/2/gunOffset, 2) + Math.pow(self.height/2/gunOffset, 2) )
+    var radius = Math.sqrt( (self.width/2/gunOffset * self.width/2/gunOffset) + (self.height/2/gunOffset * self.height/2/gunOffset) )
     var b = Bullet(angle, self);
-    b.x = self.x;
-    b.y = self.y;
+    b.x = (radius) * Math.cos(radian) + centerX - b.width/2;
+    b.y = (radius) * Math.sin(radian) + centerY - b.height/2; 
+
+    var b2 = Bullet(angle,self);
+    b2.x = (radius) * Math.cos(radian2) + centerX - b.width/2;
+    b2.y = (radius) * Math.sin(radian2) + centerY - b.height/2; 
   }
 
   Player.list[id] = self;
@@ -116,7 +158,8 @@ Player.update = function() {
       drawWidth: player.drawWidth,
       drawHeight: player.drawHeight,
       rotation: player.rotation,
-      number: player.number
+      number: player.number,
+      radius: player.radius
     })
   }
   return pack;

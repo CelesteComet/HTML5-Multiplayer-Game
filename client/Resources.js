@@ -14,13 +14,14 @@ loadImage("miniufo", "gif");
 loadImage("bullet", "png");
 loadImage("bulletHit", "png");
 loadImage("ocean", "png");
+loadImage("cloud1", "png");
 /*
 loadImage("explosion", 'png', game);
 
 loadImage("ocean", 'png', game);
 loadImage("oceanflipped", 'png', game);
 
-loadImage("cloud1", "png", game);
+
 
 loadImage("stubbi", "png", game);
 loadImage("bubblepuff", "png", game);

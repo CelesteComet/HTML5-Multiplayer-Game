@@ -3,15 +3,22 @@ Entity = function() {
     id: Math.random(),
     x: 0,
     y: 0,
+    width: 50,
+    height: 50,
     drawWidth: 50,
     drawHeight: 50,
     vX: 0,
     vY: 0,
-    tick: 0
+    tick: 0,
+    lifeTime: 500
   }
 
   self.update = function() {
+    self.tick++;
     self.updatePosition();
+    if(self.tick > self.lifeTime) {
+      self.toRemove = true;
+    }
   }
 
   self.updatePosition = function() {

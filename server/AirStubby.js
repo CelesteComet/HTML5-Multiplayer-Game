@@ -11,7 +11,7 @@ AirStubby = function() {
   self.width = self.drawWidth;
   self.height = self.drawHeight;
   self.vX = 0
-  self.vY = 0.5;
+  self.vY = 2;
   self.tick = 0;
   self.toRemove = false;
   self.lifeTime = 1000;
@@ -19,7 +19,7 @@ AirStubby = function() {
   self.health = 100;
   self.animationFrame = 0;
   self.animationFrameLength = 15;
-  self.animationSpeed = 2;
+  self.animationSpeed = 4;
 
 
 
@@ -48,9 +48,9 @@ AirStubby = function() {
       var p = Player.getRandomPlayer();
       if(p) {
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
-        var b = Bubble(angle);
-        b.x = self.x;
-        b.y = self.y;
+        //var b = Bubble(angle);
+        //b.x = self.x;
+        //b.y = self.y;
       }
     }
   }

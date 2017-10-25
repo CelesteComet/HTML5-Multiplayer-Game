@@ -12,6 +12,10 @@ var math = function() {
     var max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; 
   }
+
+  self.degreeToRadian = function(deg) {
+    return deg * (Math.PI / 180);
+  }
   return self;
 }
 

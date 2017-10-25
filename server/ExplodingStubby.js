@@ -31,9 +31,10 @@ SpriteEffect = function(x, y) {
 ExplodingStubby = function(x, y, effectName) {
   var self = SpriteEffect(x, y);
   self.effect = ExplodingStubby.effects[effectName];
-  var {animationFrame, animationFrameLength, width, height, image, name} = self.effect;
+  var {animationFrame, animationFrameLength, animationSpeed, width, height, image, name} = self.effect;
   self.animationFrame = animationFrame; 
   self.animationFrameLength = animationFrameLength;
+  self.animationSpeed = animationSpeed;
   self.width = width;
   self.height = height;
   self.image = image;
@@ -94,8 +95,8 @@ var bulletHitEffect = {
   animationFrame: 0,
   animationFrameLength: 16,
   animationSpeed: 1,
-  width: 40,
-  height: 40
+  width: 100,
+  height: 100
 }
 
 ExplodingStubby.addEffect(explodingStubbyEffect);
