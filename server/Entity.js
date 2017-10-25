@@ -1,8 +1,8 @@
 Entity = function() {
   var self = {
-    id: "",
-    x: 250,
-    y: 250,
+    id: Math.random(),
+    x: 0,
+    y: 0,
     drawWidth: 50,
     drawHeight: 50,
     vX: 0,

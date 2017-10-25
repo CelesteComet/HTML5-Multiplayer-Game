@@ -24,6 +24,7 @@ require('./server/AirStubby');
 require('./server/Bubble');
 require('./server/Bullet');
 require('./server/ExplodingStubby');
+require('./server/Ocean');
 
 
 
@@ -52,7 +53,8 @@ setInterval(function() {
     players: Player.update(),
     airStubbys: AirStubby.update(),
     bubbles: Bubble.update(),
-    spriteEffects: ExplodingStubby.update()
+    spriteEffects: ExplodingStubby.update(),
+    background: Ocean.update()
   }
   var total = 0;
   for(var i in pack) {

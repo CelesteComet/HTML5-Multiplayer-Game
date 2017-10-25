@@ -4,7 +4,8 @@ var totalResources = 13;
 var audio = {
   "smallExplosion": "audio/smallExplosion.mp3",
   "bubbleShoot": "audio/bubbleShoot.mp3",
-  "smallerExplosion": "audio/smallerExplosion.mp3"
+  "smallerExplosion": "audio/smallerExplosion.mp3",
+  "gun": "audio/gun.mp3"
 };
 
 loadImage("neworbs", 'png');
@@ -12,6 +13,7 @@ loadImage("jet", 'gif');
 loadImage("miniufo", "gif");
 loadImage("bullet", "png");
 loadImage("bulletHit", "png");
+loadImage("ocean", "png");
 /*
 loadImage("explosion", 'png', game);
 

@@ -10,6 +10,7 @@ Bubble = function(angle) {
   self.vY = Math.sin(angle/180*Math.PI) * self.speed;
   self.animationFrame = 0;
   self.animationFrameLength = 49;
+  self.sound = false;
 
   var super_update = self.update;
   self.update = function() {
@@ -19,6 +20,9 @@ Bubble = function(angle) {
     if(self.animationFrame == self.animationFrameLength - 1) {
       self.animationFrame = 0;
     }
+
+    if(self.tick == 1) { self.sound = true} else { self.sound = false}
+
     self.animationFrame += 1;
 
     if(self.tick > self.lifeTime) {
@@ -45,7 +49,8 @@ Bubble.update = function() {
     pack.push({
       x: bubble.x,
       y: bubble.y,
-      animationFrame: bubble.animationFrame
+      animationFrame: bubble.animationFrame,
+      sound: bubble.sound
     })
   }
   return pack;
