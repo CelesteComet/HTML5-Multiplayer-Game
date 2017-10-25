@@ -48,9 +48,9 @@ AirStubby = function() {
       var p = Player.getRandomPlayer();
       if(p) {
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
-        //var b = Bubble(angle);
-        //b.x = self.x;
-        //b.y = self.y;
+        var b = Bubble(angle);
+        b.x = self.x;
+        b.y = self.y;
       }
     }
   }
