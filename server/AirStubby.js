@@ -62,6 +62,11 @@ AirStubby = function() {
       self.showHealthBar = false;
       self.toRemove = true 
       ExplodingStubby(self.x, self.y, 'miniufo');
+      ExplodingStubby(self.x, self.y, 'explosion');
+      ExplodingStubby(self.x, self.y, 'explosion');
+      ExplodingStubby(self.x, self.y, 'explosion');
+      ExplodingStubby(self.x, self.y, 'explosion');
+      ExplodingStubby(self.x, self.y, 'explosion');
     }
   }
 
@@ -75,7 +80,7 @@ AirStubby.list = {};
 
 AirStubby.update = function() {
   var pack = [];
-  if (Math.random() < 0.02) {
+  if (Math.random() < 0.1) {
     AirStubby();
   }
   for(var i in AirStubby.list) {

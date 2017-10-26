@@ -1,8 +1,11 @@
+var math = require('./math')();
 SpriteEffect = function(x, y) {
   var self = {
     id: Math.random(),
     x: x,
     y: y,
+    vX: 0,
+    vY: 0,
     img: "",
     width: 20,
     height: 20,
@@ -16,8 +19,10 @@ SpriteEffect = function(x, y) {
 
   self.update = function() {
     self.tick++;
+    self.x += self.vX;
+    self.y += self.vY;
     if(self.tick == 1) { self.sound = true} else { self.sound = false}
-    if(self.animationFrame > self.animationFrameLength - 1) {
+    if(self.animationFrame > self.animationFrameLength) {
       self.toRemove = true;
     }
     if(self.tick % self.animationSpeed == 0) {
@@ -31,7 +36,9 @@ SpriteEffect = function(x, y) {
 ExplodingStubby = function(x, y, effectName) {
   var self = SpriteEffect(x, y);
   self.effect = ExplodingStubby.effects[effectName];
-  var {animationFrame, animationFrameLength, animationSpeed, width, height, image, name} = self.effect;
+  var {animationFrame, animationFrameLength, animationSpeed, width, height, image, name, update} = self.effect;
+  self.e = math.getRandomNegativePositive(-10,10);
+  self.f = math.getRandomNegativePositive(-10,10);
   self.animationFrame = animationFrame; 
   self.animationFrameLength = animationFrameLength;
   self.animationSpeed = animationSpeed;
@@ -39,8 +46,12 @@ ExplodingStubby = function(x, y, effectName) {
   self.height = height;
   self.image = image;
   self.name = name;
+
   var super_update = self.update;
   self.update = function() {
+    if(update) {
+      update(self);
+    }
     super_update();
   }
 
@@ -83,7 +94,7 @@ var explodingStubbyEffect = {
   name: 'miniufo',
   image: 'miniufo.png',
   animationFrame: 15,
-  animationFrameLength: 36,
+  animationFrameLength: 35,
   animationSpeed: 3,
   width: 88,
   height: 76
@@ -99,8 +110,27 @@ var bulletHitEffect = {
   height: 100
 }
 
+
+var smallExplosionEffect = {
+  name: 'explosion',
+  image: 'explosion.png',
+  animationFrame: 0,
+  animationFrameLength: 14,
+  animationSpeed: 2,
+  width: 100,
+  height: 100,
+  update: function(self) {
+    console.log(self.e)
+    self.y += self.e;
+    self.x += self.f;
+  }
+}
+
+
+
 ExplodingStubby.addEffect(explodingStubbyEffect);
 ExplodingStubby.addEffect(bulletHitEffect);
+ExplodingStubby.addEffect(smallExplosionEffect);
 
 
 

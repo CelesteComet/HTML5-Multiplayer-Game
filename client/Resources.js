@@ -15,6 +15,7 @@ loadImage("bullet", "png");
 loadImage("bulletHit", "png");
 loadImage("ocean", "png");
 loadImage("cloud1", "png");
+loadImage("explosion", 'png');
 /*
 loadImage("explosion", 'png', game);
 
