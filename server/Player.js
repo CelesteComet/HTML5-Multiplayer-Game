@@ -96,7 +96,7 @@ function Player() {
 
 
 
-    this.list[i.id] = i;
+    //this.list[i.id] = i;
     return i;
   }
 
@@ -121,6 +121,8 @@ function Player() {
   this.onConnect = function(socket) {
 
     var player = this.create();
+    this.list[socket.id] = player;
+
     // Begin the starting move into the game
 
     player.x = 500;
@@ -138,7 +140,7 @@ function Player() {
   }
 
   this.onDisconnect = function(socket) {
-    delete this.list[socket.this];
+    delete this.list[socket.id];
   }
 
   this.getRandomPlayer = function() {

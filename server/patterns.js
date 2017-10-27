@@ -1,3 +1,4 @@
+var math = require('./math')();
 var patterns = {
 
   fourSwoopDown: function() {
@@ -15,7 +16,31 @@ var patterns = {
     c.stop()
     d.addMove(0, 4, swoopTime);
     d.stop();
+  },
+
+  topInCircleAround: function() {
+    var radius = 350;
+    var a = AirStubby();
+    var xSpeed = 0;
+    var ySpeed = 3;
+    var t = 20;
+    a.x = 475;
+    a.y = -100;
+    a.addMove(-xSpeed, ySpeed, t)
+    a.stop();
+    a.addModifier(function(target){
+      target.vX = 1;
+      target.vY += 2;
+    }, 1)
+  },
+
+
+  circleAround: function() {
+    patterns.topInCircleAround();
+
   }
+
+
 }
 
 

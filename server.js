@@ -51,10 +51,10 @@ sio.sockets.on('connection', function(socket) {
   })
 
 
+
+
+
 })
-
-
-
 
 var lastUpdateTime = (new Date()).getTime();
 setInterval(function() {
@@ -74,12 +74,17 @@ setInterval(function() {
     total += pack[i].length;
   }
   
+  
 
   for(var i in SOCKET_LIST) {
     var socket = SOCKET_LIST[i];
     socket.emit('newPosition', pack);
   }
 }, 1000/60);
+
+
+
+
 
 
 

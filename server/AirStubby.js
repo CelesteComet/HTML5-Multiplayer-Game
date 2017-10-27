@@ -54,14 +54,16 @@ AirStubby = function() {
       }
     }
 
-    var canFire = self.tick % 100 == 0;
+    var canFire = self.tick % 10 == 0;
 
     if(canFire) {
       var p = Player.getRandomPlayer();
       if(p) {
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
         var b = Bubble(angle);
-
+        if(Math.random() < 0.2) {
+          b.unbreakable = true;
+        }
         b.x = self.x;
         b.y = self.y;
       }
@@ -84,6 +86,8 @@ AirStubby = function() {
   
 
   AirStubby.list[self.id] = self;
+
+
   return self;
 }
 
@@ -94,8 +98,10 @@ AirStubby.list = {};
 AirStubby.update = function() {
   AirStubby.tick++;
   var pack = [];
-  if(AirStubby.tick % 200 == 0) {
-    patterns.fourSwoopDown()
+  if(Object.keys(AirStubby.list).length == 0) {//Object.keys(AirStubby.list).length == 0) {
+    patterns.fourSwoopDown();
+    patterns.fourSwoopDown();
+
   }
   for(var i in AirStubby.list) {
     var stubby = AirStubby.list[i];

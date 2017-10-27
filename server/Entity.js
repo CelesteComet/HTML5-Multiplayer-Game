@@ -13,7 +13,9 @@ function Entity() {
       tick: 0,
       lifeTime: 300,
       moves: [],
+      modifier: null,
       moveLife: 0,
+      modifierTick: 0,
       toRemove: false
     }
 
@@ -25,10 +27,10 @@ function Entity() {
       
       var newMove = null;
       if(this.moveLife < 0 && this.moves) {
-        newMove = this.moves.shift();
-      }
+          newMove = this.moves.shift();
+      } 
 
-      this.updatePosition(newMove);
+      this.updatePosition(newMove, this.modifier);
       
 
       if(this.tick > this.lifeTime) {
@@ -37,12 +39,19 @@ function Entity() {
     }
 
 
-    instance.updatePosition = function(move) {
+    instance.updatePosition = function(move, modifier) {
+
       if(move) {
         this.vX = move.vX;
         this.vY = move.vY;
         this.moveLife = move.t;
+      } else if (modifier && this.moveLife < 0) {
+        if(this.tick % this.modifierTime == 0) {
+          this.modifierTick++;
+        }
+        modifier(this);
       }
+
       this.x += this.vX;
       this.y += this.vY;
     }
@@ -90,6 +99,13 @@ function Entity() {
         vY: 0,
         t: 0
       })
+      this.modifier = null;
+      this.modifierTick = 0;
+    }
+
+    instance.addModifier = function(modifier, modifierTime) {
+      this.modifier = modifier;
+      this.modifierTime = modifierTime;
     }
 
     return instance;

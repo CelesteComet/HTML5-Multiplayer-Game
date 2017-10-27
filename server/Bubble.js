@@ -13,6 +13,7 @@ Bubble = function(angle) {
   self.animationFrame = 0;
   self.animationFrameLength = 49;
   self.sound = false;
+  self.unbreakable = false;
 
   var super_update = self.update.bind(self);
   self.update = function() {
@@ -36,9 +37,11 @@ Bubble = function(angle) {
       var rect = {x: bullet.x, y: bullet.y, w: bullet.width, h: bullet.height};
       var circle = {x: self.x, y: self.y, r: self.radius}
       if(self.rectCircleCollision(rect, circle)) {
-        ExplodingStubby(self.x - self.width/2, self.y - self.height/2, 'bubblePuff');
-        self.toRemove = true;
-        bullet.toRemove = true;
+        if(!self.unbreakable) {
+          self.toRemove = true;
+          ExplodingStubby(self.x - self.width/2, self.y - self.height/2, 'bubblePuff');
+          bullet.toRemove = true;
+        } 
       }
     }
     super_update();
@@ -63,7 +66,9 @@ Bubble.update = function() {
       x: bubble.x,
       y: bubble.y,
       animationFrame: bubble.animationFrame,
-      sound: bubble.sound
+      sound: bubble.sound,
+      radius: bubble.radius,
+      unbreakable: bubble.unbreakable
     })
   }
   return pack;

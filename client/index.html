@@ -35,9 +35,13 @@
   var soundOn = true;
   var socket = io();
   var debug = false;
+  var clearDebug = false;
 
   socket.on('newPosition', function(data) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (!clearDebug) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    }
 
     data['clouds'].forEach(function(cloud) {
       ctx.save();
@@ -59,12 +63,29 @@
     })
 
     data['bubbles'].forEach(function(bubble) {
+      if(debug) {
+        ctx.save();
+        ctx.beginPath()
+        ctx.arc(bubble.x + bubble.radius - 1, bubble.y + bubble.radius - 2, bubble.radius, Math.PI * 2, false)
+        ctx.restore();
+      }
       ctx.save();
       SpriteManager.sprites['bubble'][bubble.animationFrame].draw(ctx, bubble.x, bubble.y, 50, 50);
-      if(bubble.sound && soundOn) {
-        playAudio("bubbleShoot", 0.1);
-      }
       ctx.restore();
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.globalAlpha = 0.7;
+      ctx.fillStyle = 'purple'
+      if(bubble.unbreakable) {
+        ctx.arc(bubble.x + bubble.radius - 1, bubble.y + bubble.radius - 2, bubble.radius, Math.PI * 2, false)
+      }
+      ctx.fill();
+      ctx.restore();
+
+      if(bubble.sound && soundOn) {
+        playAudio("bubbleShoot", 0.005);
+      }
     })
 
     var healthBarOffset = 10;
