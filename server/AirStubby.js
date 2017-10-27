@@ -55,8 +55,9 @@ AirStubby = function() {
     }
 
     var canFire = self.tick % 10 == 0;
-
+    var gunOffset = 18;
     if(canFire) {
+
       var p = Player.getRandomPlayer();
       if(p) {
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
@@ -64,8 +65,8 @@ AirStubby = function() {
         if(Math.random() < 0.2) {
           b.unbreakable = true;
         }
-        b.x = self.x;
-        b.y = self.y;
+        b.x = self.x + self.width/2 - gunOffset;
+        b.y = self.y + self.height;
       }
     }
   }

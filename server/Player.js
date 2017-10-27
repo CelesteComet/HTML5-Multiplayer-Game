@@ -20,6 +20,7 @@ function Player() {
     i.rotationSpeed = 4;
     i.fireRate = 4;
     i.maxSpeed = 10;
+    i.friction = 0.9;
 
     // controls
 
@@ -52,23 +53,21 @@ function Player() {
       this.updateSpeed();
       super_update();
     }
-
+    
     i.updateSpeed = function() {
-      if(this.pressingRight) { 
-        this.vX = this.maxSpeed; 
-      } else if(this.pressingLeft) {
-        this.vX = -this.maxSpeed;
+      if(this.pressingRight && this.vX < this.maxSpeed) { 
+        this.vX++;
+      } else if(this.pressingLeft && this.vX < this.maxSpeed) {
+        this.vX--;
       } else {
-        this.vX = 0;
+        //this.vX = 0;
       }
 
-      if(this.pressingUp) { 
-        this.vY = -this.maxSpeed; 
-      } else if(this.pressingDown) {
-        this.vY = this.maxSpeed;
-      } else {
-        this.vY = 0;
-      }
+      if(this.pressingUp && this.vY < this.maxSpeed) { 
+        this.vY--
+      } else if(this.pressingDown && this.vY < this.maxSpeed) {
+        this.vY++;
+      } 
     }
 
 

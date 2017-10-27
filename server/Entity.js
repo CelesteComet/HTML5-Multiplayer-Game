@@ -6,6 +6,7 @@ function Entity() {
       y: 0,
       vX: 0,
       vY: 0,
+      friction: 1,
       width: 50,
       height: 50,
       drawWidth: 50,
@@ -51,6 +52,9 @@ function Entity() {
         }
         modifier(this);
       }
+
+      this.vX *= this.friction;
+      this.vY *= this.friction;
 
       this.x += this.vX;
       this.y += this.vY;
