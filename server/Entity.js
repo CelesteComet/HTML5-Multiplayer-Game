@@ -11,7 +11,7 @@ function Entity() {
       drawWidth: 50,
       drawHeight: 50,
       tick: 0,
-      lifeTime: 500,
+      lifeTime: 300,
       moves: [],
       moveLife: 0,
       toRemove: false

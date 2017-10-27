@@ -132,9 +132,22 @@ var smallExplosionEffect = {
 
 
 
+var bubblePuffEffect = {
+  name: 'bubblePuff',
+  image: 'bubblePuff.png',
+  animationFrame: 0,
+  animationFrameLength: 2,
+  animationSpeed: 2,
+  width: 50,
+  height: 50
+}
+
+
+
 ExplodingStubby.addEffect(explodingStubbyEffect);
 ExplodingStubby.addEffect(bulletHitEffect);
 ExplodingStubby.addEffect(smallExplosionEffect);
+ExplodingStubby.addEffect(bubblePuffEffect);
 
 
 

@@ -97,7 +97,7 @@ SpriteManager.addSprite('explosion', images['explosion'], {
   sheetHeight: 4
 })
 
-SpriteManager.addSprite('bubblePuff', images['bubblepuff'], {
+SpriteManager.addSprite('bubblePuff', images['bubblePuff'], {
   sx: 78.75,
   sy: 75,
   sWidth: 78.75,
@@ -199,9 +199,9 @@ SpriteManager.sprites['explodingUFO'] = [
   new Sprite(images['miniufo'], 235, 358, 31, 53),
   new Sprite(images['miniufo'], 287, 359, 29, 53),
   new Sprite(images['miniufo'], 192, 421, 26, 53)
-  
-
 ]
+
+
 
 
 

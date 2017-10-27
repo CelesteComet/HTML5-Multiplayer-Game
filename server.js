@@ -68,13 +68,12 @@ setInterval(function() {
     spriteEffects: ExplodingStubby.update(dt),
     clouds: Cloud.update(dt)
   }
-  /*
+  
   var total = 0;
   for(var i in pack) {
     total += pack[i].length;
   }
-  */
- // console.log(total);
+  
 
   for(var i in SOCKET_LIST) {
     var socket = SOCKET_LIST[i];

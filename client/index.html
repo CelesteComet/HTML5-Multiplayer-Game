@@ -59,7 +59,6 @@
     })
 
     data['bubbles'].forEach(function(bubble) {
-      console.log(bubble);
       ctx.save();
       SpriteManager.sprites['bubble'][bubble.animationFrame].draw(ctx, bubble.x, bubble.y, 50, 50);
       if(bubble.sound && soundOn) {
@@ -88,6 +87,7 @@
     })
 
     data['spriteEffects'].forEach(function(effect) {
+      //console.log(SpriteManager.sprites[effect.name]);
       if(effect.name == 'bulletHit') {
         SpriteManager.sprites[effect.name][effect.animationFrame].draw(ctx, effect.x - 50, effect.y - 50, effect.width, effect.height);
         return;

@@ -44,6 +44,16 @@ AirStubby = function() {
       self.toRemove = true;
     }
 
+    // Check all AirStubbys for collision
+    for(var i in Bullet.list) {
+      var b = Bullet.list[i];
+      if(self.collide(b)) {
+        ExplodingStubby(b.x + Math.random() * 5, b.y + Math.random() * 5, 'bulletHit');
+        b.toRemove = true;
+        self.gotHitBy(b);
+      }
+    }
+
     var canFire = self.tick % 100 == 0;
 
     if(canFire) {

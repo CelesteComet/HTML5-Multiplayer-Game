@@ -15,7 +15,9 @@ loadImage("bullet", "png");
 loadImage("bulletHit", "png");
 loadImage("ocean", "png");
 loadImage("cloud1", "png");
+loadImage("bubblePuff", 'png');
 loadImage("explosion", 'png');
+
 /*
 loadImage("explosion", 'png', game);
 
@@ -25,7 +27,7 @@ loadImage("oceanflipped", 'png', game);
 
 
 loadImage("stubbi", "png", game);
-loadImage("bubblepuff", "png", game);
+
 loadImage("bulletHit", "png", game);
 loadImage("diamanji", "png", game);
 , game);
