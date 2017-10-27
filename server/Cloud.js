@@ -1,7 +1,7 @@
 var math = require('./math')();
 
 Cloud = function() {
-  var self = Entity();
+  var self = Entity.create();
 
   var super_update = self.update;
   self.update = function() {

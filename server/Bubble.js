@@ -1,5 +1,7 @@
+
+
 Bubble = function(angle) {
-  var self = Entity();
+  var self = Entity.create();
   self.id = Math.random();
   self.radius = 25.6;
   self.damage = 10;
@@ -12,9 +14,8 @@ Bubble = function(angle) {
   self.animationFrameLength = 49;
   self.sound = false;
 
-  var super_update = self.update;
+  var super_update = self.update.bind(self);
   self.update = function() {
-    self.tick++;
 
     // update animation
     if(self.animationFrame == self.animationFrameLength - 1) {
@@ -44,7 +45,7 @@ Bubble.update = function() {
     var bubble = Bubble.list[i];
     bubble.update();
     if(bubble.toRemove) {
-      delete this.list[i];
+      delete Bubble.list[i];
     }
     pack.push({
       x: bubble.x,

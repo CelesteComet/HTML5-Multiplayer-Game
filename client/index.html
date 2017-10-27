@@ -25,12 +25,8 @@
 <script type="text/javascript" src="./Water.js"></script>
 
 <script type="text/javascript">
-
-
-
   var canvas = document.getElementById("canvas");
   var ctx = document.getElementById("canvas").getContext('2d');
-  ctx.font = '30px Ariel';
 
   canvas.width = 1000;
   canvas.height = 700;
@@ -38,6 +34,7 @@
 
   var soundOn = true;
   var socket = io();
+  var debug = false;
 
   socket.on('newPosition', function(data) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -48,22 +45,21 @@
       ctx.restore();
     })
 
-
     data['bullets'].forEach(function(bullet) {
       ctx.save();
       ctx.translate(bullet.x + bullet.width/2, bullet.y + bullet.height/2)
       ctx.rotate(bullet.rotation * Math.PI / 180);
       ctx.drawImage(images['bullet'], -bullet.width/2, -bullet.height/2, bullet.width, bullet.height);
       ctx.restore();
-      /*
-      //DEBUG SQUARE
-      ctx.save()
-      ctx.strokeRect(bullet.x, bullet.y, 10, 10)
-      ctx.restore();
-      */
+      if(debug) {
+        ctx.save()
+        ctx.strokeRect(bullet.x, bullet.y, 10, 10)
+        ctx.restore();
+      }
     })
 
     data['bubbles'].forEach(function(bubble) {
+      console.log(bubble);
       ctx.save();
       SpriteManager.sprites['bubble'][bubble.animationFrame].draw(ctx, bubble.x, bubble.y, 50, 50);
       if(bubble.sound && soundOn) {
@@ -85,7 +81,9 @@
       }
       ctx.save();
       SpriteManager.sprites['miniufo'][stubby.animationFrame].draw(ctx, stubby.x, stubby.y, stubby.drawWidth, stubby.drawHeight);
-      ctx.strokeRect(stubby.x, stubby.y, stubby.width, stubby.height)
+      if(debug) {
+        ctx.strokeRect(stubby.x, stubby.y, stubby.width, stubby.height)
+      }
       ctx.restore();
     })
 
@@ -97,7 +95,7 @@
       ctx.save();
       SpriteManager.sprites[effect.name][effect.animationFrame].draw(ctx, effect.x, effect.y, effect.width, effect.height);
       if(effect.sound && effect.name == 'miniufo' && soundOn) {
-        playAudio("smallerExplosion", 0.3);
+        playAudio("smallerExplosion", 0.1);
       }
       
       ctx.restore();
@@ -105,44 +103,32 @@
 
 
     data['players'].forEach(function(player) {
-      // Debug Circle
-      /*
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(player.x + player.drawWidth/2 - 0, player.y + player.drawHeight/2 - 0, player.radius - 45, Math.PI * 2, false)
-      ctx.stroke();
-      ctx.restore();
-      */
-      // Debug Square
-      /*
-      ctx.save();
-      ctx.strokeRect(player.x, player.y, player.drawWidth, player.drawHeight);
-      ctx.restore();
-      */
+      if(debug) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(player.x + player.drawWidth/2 - 0, player.y + player.drawHeight/2 - 0, player.radius - 45, Math.PI * 2, false)
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      if(debug) {
+        ctx.save();
+        ctx.strokeRect(player.x, player.y, player.drawWidth, player.drawHeight);
+        ctx.restore();
+      }
 
       ctx.save();
       ctx.translate(player.x + player.drawWidth/2, player.y + player.drawHeight/2)
       ctx.rotate(player.rotation * Math.PI / 180);
-      //ctx.strokeRect(-player.drawWidth/2, -player.drawHeight/2, player.drawWidth, player.drawHeight);
+      if(debug) {
+        ctx.strokeRect(-player.drawWidth/2, -player.drawHeight/2, player.drawWidth, player.drawHeight);
+      }
       ctx.drawImage(images['jet'], -player.drawWidth/2, -player.drawHeight/2, player.drawWidth, player.drawHeight);
       ctx.fillText(player.number, 0, 0);
       ctx.restore();
-
-
-
     })
-
-
-
-
-
-
-    /*
-    data.forEach(function(e) {
-      ctx.fillText(e.number, e.x, e.y);
-    })
-    */
   })
+
   var isShooting = false;
   function keyUpHandler(e) {
     var key = e.keyCode;
@@ -191,9 +177,9 @@
   setInterval(function() {
     tick++;
     if(isShooting && tick % 5 == 0 && soundOn) {
-      playAudio("gun", 0.1);
+      playAudio("gun", 0.05);
     }
-  }, 60)
+  }, 1000/60)
 
   window.addEventListener("keydown", self.keyDownHandler.bind(this), false);
   window.addEventListener("keyup", self.keyUpHandler.bind(this), false);

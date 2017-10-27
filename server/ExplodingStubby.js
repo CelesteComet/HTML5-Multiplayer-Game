@@ -1,4 +1,6 @@
 var math = require('./math')();
+
+
 SpriteEffect = function(x, y) {
   var self = {
     id: Math.random(),
@@ -96,8 +98,11 @@ var explodingStubbyEffect = {
   animationFrame: 15,
   animationFrameLength: 35,
   animationSpeed: 3,
-  width: 88,
-  height: 76
+  width: 95,
+  height: 76 + 20,
+  update: function(self) {
+    self.y += 5;
+  }
 }
 
 var bulletHitEffect = {
@@ -120,7 +125,6 @@ var smallExplosionEffect = {
   width: 100,
   height: 100,
   update: function(self) {
-    console.log(self.e)
     self.y += self.e;
     self.x += self.f;
   }

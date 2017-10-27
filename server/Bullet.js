@@ -1,11 +1,11 @@
 Bullet = function(angle, owner) {
-  var self = Entity();
+  var self = Entity.create();
   self.id = Math.random();
   self.scale = .5;
   self.width = 10;//17 * self.scale;
   self.height = 20;//40 * self.scale;
   self.bulletSpeed = 20;
-  self.damage = 30;
+  self.damage = 10;
   self.owner = owner;
   self.rotation = owner.rotation;
   self.vX = Math.cos(angle/180*Math.PI) * self.bulletSpeed;
@@ -16,7 +16,7 @@ Bullet = function(angle, owner) {
   self.lifeTime = 50;
   
 
-  var super_update = self.update;
+  var super_update = self.update.bind(self)
   self.update = function() {
     if(self.tick++ > self.lifeTime) {
       self.toRemove = true;

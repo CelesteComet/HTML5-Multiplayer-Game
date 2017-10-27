@@ -1,7 +1,8 @@
 var math = require('./math')();
+var patterns = require('./patterns');
 
 AirStubby = function() {
-  var self = Entity();
+  var self = Entity.create();
   self.id = Math.random();
   self.x = Math.random() * 500;
   self.y = 0;
@@ -11,7 +12,7 @@ AirStubby = function() {
   self.width = self.drawWidth;
   self.height = self.drawHeight;
   self.vX = 0
-  self.vY = 2;
+  self.vY = 1.5;
   self.tick = 0;
   self.toRemove = false;
   self.lifeTime = 1000;
@@ -19,14 +20,14 @@ AirStubby = function() {
   self.health = 100;
   self.animationFrame = 0;
   self.animationFrameLength = 15;
-  self.animationSpeed = 4;
+  self.animationSpeed = 8;
 
 
 
-  var super_update = self.update;
+  var super_update = self.update.bind(self);
   self.update = function() {
+
     super_update();
-    self.tick++;
 
     // animation
     if(self.tick % self.animationSpeed == 0) {
@@ -44,13 +45,15 @@ AirStubby = function() {
     }
 
     var canFire = self.tick % 100 == 0;
+
     if(canFire) {
       var p = Player.getRandomPlayer();
       if(p) {
         var angle = math.angleBetweenTwoPoints({x: self.x, y: self.y}, {x: p.x, y: p.y});
-        //var b = Bubble(angle);
-        //b.x = self.x;
-        //b.y = self.y;
+        var b = Bubble(angle);
+
+        b.x = self.x;
+        b.y = self.y;
       }
     }
   }
@@ -65,8 +68,6 @@ AirStubby = function() {
       ExplodingStubby(self.x, self.y, 'explosion');
       ExplodingStubby(self.x, self.y, 'explosion');
       ExplodingStubby(self.x, self.y, 'explosion');
-      ExplodingStubby(self.x, self.y, 'explosion');
-      ExplodingStubby(self.x, self.y, 'explosion');
     }
   }
 
@@ -76,12 +77,15 @@ AirStubby = function() {
   return self;
 }
 
+AirStubby.tick = 0;
+
 AirStubby.list = {};
 
 AirStubby.update = function() {
+  AirStubby.tick++;
   var pack = [];
-  if (Math.random() < 0.1) {
-    AirStubby();
+  if(AirStubby.tick % 200 == 0) {
+    patterns.fourSwoopDown()
   }
   for(var i in AirStubby.list) {
     var stubby = AirStubby.list[i];
